@@ -21,3 +21,26 @@ class Decapitalizer:
 
         return text.lower(), deviations_positions
 
+    def capitalize(self, text: DecapitalizedText, deviations: DeviationsPositions) -> str:
+        deviations = set(deviations)
+        capitalized = []
+        for position, symbol in enumerate(text):
+            symbol: Symbol
+            index = position + 1
+
+            check_results = [rule.eat(symbol, save=False) for rule in self.__rules]
+            check_results = set(check_results)
+
+            if (
+                all(result is RuleCheckResult.NOT_MATCHED for result in check_results) and index in deviations
+                or RuleCheckResult.MATCHED_DEVIATION in check_results and index not in deviations
+            ):
+                [rule.eat(symbol.upper()) for rule in self.__rules]
+                capitalized.append(symbol.upper())
+            else:
+                [rule.eat(symbol) for rule in self.__rules]
+                capitalized.append(symbol)
+
+        return ''.join(capitalized)
+
+
