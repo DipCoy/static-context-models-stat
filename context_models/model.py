@@ -34,3 +34,10 @@ class ContextModel:
 
         return string_size + count_size + next_symbols_size + next_symbols_counters_size
 
+    def __repr__(self):
+        return (f'ContextModel('
+                f'string="{self.string}", '
+                f'count={self.count}, '
+                f'next_symbols_count={len(self.next_symbols_stat)}, '
+                f'next_symbols_stat={self.next_symbols_stat.__repr__()}'
+                f')')

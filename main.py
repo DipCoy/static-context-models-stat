@@ -48,13 +48,15 @@ def main(text_file_path: str):
     fib_encoder = FibonacciEncoder(max_number=CHUNK_SIZE + 1, zero=True)
     deviations_fib_encoded = fib_encoder.encode(total_deviations)
 
-    print(f'Deviations Fibonacci Encoded Bit Array: {deviations_fib_encoded}')
-    print(f'Bytes length {math.ceil(len(deviations_fib_encoded) / 8)}')
+    print(f'Total Deviations number = {len(total_deviations)}')
+    print(f'Fibonacci encoded Deviations Bytes length = {math.ceil(len(deviations_fib_encoded) / 8)}')
     three_order_context_models = context_models_builder.context_models
 
     total_context_models_size = sum(model.bytes_size for model in three_order_context_models)
-    print(f'Total 3 Order Context Models Size = {total_context_models_size} bytes')
+    print(f'Total 3 Order Context Models number = {len(three_order_context_models)}')
+    print(f'Total 3 Order Context Models Byte Size = {total_context_models_size} bytes')
 
+    print(f'Deviations Fibonacci Encoded Bit Array: {deviations_fib_encoded}')
     input('3 order context models: Next? [Enter]')
     pprint(three_order_context_models)
 
