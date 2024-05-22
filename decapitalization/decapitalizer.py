@@ -19,5 +19,5 @@ class Decapitalizer:
             ):
                 deviations_positions.append(position + 1)
 
-        return text.lower(), deviations_positions or [0]    # zero means that there are no deviations in current chunk
+        return text.lower(), deviations_positions
 

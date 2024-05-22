@@ -40,6 +40,9 @@ def main(text_file_path: str):
     total_deviations = []
     for chunk in read_text(text_file_path):
         decapitalized_text, deviations = decapitalizer.decapitalize(chunk)
+        if not deviations:
+            deviations = [0]
+
         total_deviations.extend(deviations)
         context_models_builder.process(decapitalized_text)
 
@@ -48,7 +51,7 @@ def main(text_file_path: str):
     fib_encoder = FibonacciEncoder(max_number=CHUNK_SIZE + 1, zero=True)
     deviations_fib_encoded = fib_encoder.encode(total_deviations)
 
-    print(f'Total Deviations number = {len(total_deviations)}')
+    print(f'Total Deviations number = {len([deviation for deviation in total_deviations if deviation != 0])}')
     print(f'Fibonacci encoded Deviations Bytes length = {math.ceil(len(deviations_fib_encoded) / 8)}')
     three_order_context_models = context_models_builder.context_models
 
