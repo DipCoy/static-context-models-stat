@@ -23,16 +23,17 @@ class ContextModel:
 
     @property
     def bytes_size(self) -> int:
-        count_int_type_size = 4     # unsigned int
+        count_int_type_size = 4  # unsigned int
         symbol_type_size = 1
 
         string_size = len(self.string) * symbol_type_size
         count_size = count_int_type_size
 
+        next_symbols_counter_size = count_int_type_size
         next_symbols_size = len(self.next_symbols_stat) * symbol_type_size
         next_symbols_counters_size = len(self.next_symbols_stat) * count_int_type_size
 
-        return string_size + count_size + next_symbols_size + next_symbols_counters_size
+        return string_size + count_size + next_symbols_counter_size + next_symbols_size + next_symbols_counters_size
 
     def __repr__(self):
         return (f'ContextModel('
